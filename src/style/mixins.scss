@@ -1,0 +1,60 @@
+//Центрирование по вертикали для абсолютного блока
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//Центрирование по вертикали для абсолютного блока
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//Центрирование по вертикали
+@mixin ghostVerticalAlign() {
+  &:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+    width: .1px;
+  }
+}
+
+//Сброс обтекания для плавающих блоков
+@mixin clearfix {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Breakpoint для адаптивности
+@mixin breakpoint($screen) {
+  @if $screen==xs {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
+  @else if $screen==sm {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @else if $screen==md {
+    @media (min-width: 992px) {
+      @content;
+    }
+  }
+  @else if $screen==lg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  }
+}

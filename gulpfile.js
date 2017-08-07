@@ -4,21 +4,24 @@ var path = {
     js: "build/js/",
     css: "build/css/",
     img: "build/img/",
-    fonts: "build/fonts/"
+    fonts: "build/fonts/",
+    htaccess: "build/"
   },
   src: {
     html: "src/*.html",
     js: "src/js/main.js",
     style: "src/style/main.scss",
     img: "src/img/**/*.*",
-    fonts: "src/fonts/**/*.*"
+    fonts: "src/fonts/**/*.*",
+    htaccess: "src/**/*.htaccess"
   },
   watch: {
     html: "src/**/*.html",
     js: "src/js/**/*.js",
     style: "src/style/**/*.scss",
     img: "src/img/**/*.*",
-    fonts: "src/fonts/**/*.*"
+    fonts: "src/fonts/**/*.*",
+    htaccess: "src/**/*.htaccess"
   },
   clean: "./build"
 };
@@ -45,6 +48,7 @@ var rimraf = require("rimraf");
 var sourcemap = require("gulp-sourcemap");
 var browserSync = require("browser-sync");
 var csso = require("gulp-csso");
+var rename = require("gulp-rename");
 var reload = browserSync.reload;
 
 gulp.task("html", function() {
@@ -62,12 +66,22 @@ gulp.task("js", function() {
     .pipe(reload({ stream: true }));
 });
 
-gulp.task("style", function() {
+gulp.task("style:min", function() {
   return gulp
     .src(path.src.style)
     .pipe(sass().on("error", sass.logError))
     .pipe(postcss([autoprefixer()]))
     .pipe(csso())
+    .pipe(rename({ suffix: ".min" }))
+    .pipe(gulp.dest(path.build.css))
+    .pipe(reload({ stream: true }));
+});
+
+gulp.task("style", function() {
+  return gulp
+    .src(path.src.style)
+    .pipe(sass().on("error", sass.logError))
+    .pipe(postcss([autoprefixer()]))
     .pipe(gulp.dest(path.build.css))
     .pipe(reload({ stream: true }));
 });
@@ -95,18 +109,30 @@ gulp.task("webserver", function() {
   browserSync(config);
 });
 
+gulp.task("htaccess", function() {
+  gulp.src(path.src.htaccess).pipe(gulp.dest(path.build.htaccess));
+});
+
 gulp.task("clean", function(cb) {
   rimraf(path.clean, cb);
 });
 
-gulp.task("build", ["html", "js", "style", "fonts", "image"]);
+gulp.task("build", [
+  "html",
+  "js",
+  "style",
+  "style:min",
+  "fonts",
+  "htaccess",
+  "image"
+]);
 
 gulp.task("watch", function() {
   watch([path.watch.html], function(event, cb) {
     gulp.start("html");
   });
   watch([path.watch.style], function(event, cb) {
-    gulp.start("style");
+    gulp.start("style:min");
   });
   watch([path.watch.js], function(event, cb) {
     gulp.start("js");
