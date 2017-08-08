@@ -1,6 +1,7 @@
 var path = {
   build: {
     html: "build/",
+    pug: "src/",
     js: "build/js/",
     css: "build/css/",
     img: "build/img/",
@@ -9,6 +10,7 @@ var path = {
   },
   src: {
     html: "src/*.html",
+    pug: "src/pug/pages/*.pug",
     js: "src/js/main.js",
     style: "src/style/main.scss",
     img: "src/img/**/*.*",
@@ -17,6 +19,7 @@ var path = {
   },
   watch: {
     html: "src/**/*.html",
+    pug: "src/pug/pages/*.pug",
     js: "src/js/**/*.js",
     style: "src/style/**/*.scss",
     img: "src/img/**/*.*",
@@ -48,6 +51,7 @@ var rimraf = require("rimraf");
 var sourcemap = require("gulp-sourcemap");
 var browserSync = require("browser-sync");
 var csso = require("gulp-csso");
+var pug = require("gulp-pug");
 var rename = require("gulp-rename");
 var reload = browserSync.reload;
 
@@ -56,6 +60,17 @@ gulp.task("html", function() {
     .src(path.src.html)
     .pipe(gulp.dest(path.build.html))
     .pipe(reload({ stream: true }));
+});
+
+gulp.task("pug", function() {
+  gulp
+    .src(path.src.pug)
+    .pipe(
+      pug({
+        pretty: true
+      })
+    )
+    .pipe(gulp.dest(path.build.pug));
 });
 
 gulp.task("js", function() {
@@ -128,6 +143,9 @@ gulp.task("build", [
 ]);
 
 gulp.task("watch", function() {
+  watch([path.watch.pug], function(event, cb) {
+    gulp.start("pug");
+  });
   watch([path.watch.html], function(event, cb) {
     gulp.start("html");
   });

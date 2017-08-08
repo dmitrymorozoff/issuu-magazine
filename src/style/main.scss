@@ -8,7 +8,6 @@
 
 body {
   font-family: 'Open Sans', sans-serif;
-  height: 1000px;
 }
 
 .nav {
@@ -26,7 +25,7 @@ body {
   width: 130px;
   height: 50px;
   background: url('../img/logo.png');
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -105,6 +104,7 @@ header {
   min-height: 600px;
   padding: 50px 0;
   background: $blue-color;
+
   position: relative;
 }
 .header {
@@ -169,25 +169,38 @@ header {
   z-index: 999;
 }
 
+.book-wrapper {
+  display: flex;
+  margin-bottom: 90px;
+}
+
 .book {
   width: 350px;
+  max-height: 500px;
   overflow: hidden;
   box-shadow: 0px 10px 50px 0px rgba(0, 0, 0, 0.1);
   &__img {
     width: 100%;
   }
 }
-
+.book-two,
+.book-three {
+  width: 55%;
+}
+.book_one {
+  margin-top: 120px;
+}
 .book-content {
-  color: $gray-text-color;
+  position: relative;
   &__title {
     font-size: 22px;
     font-weight: bold;
     text-transform: uppercase;
     line-height: 32px;
+    margin-top: 30px;
+    margin-bottom: 30px;
   }
   &__desc {
-    margin-top: 30px;
     font-size: 14px;
     line-height: 24px;
   }
@@ -195,4 +208,48 @@ header {
 
 .book-content_one {
   width: 350px;
+}
+
+.book-content_two {
+  width: 45%;
+  text-align: right;
+  padding-right: 30px;
+}
+
+.book-content_three {
+  width: 45%;
+  text-align: left;
+  padding-left: 30px;
+}
+
+.treinding {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.trend-section {
+  margin-top: 160px;
+}
+
+.trend-container {
+  color: $gray-text-color;
+  &__title {
+    margin-top: 0;
+    font-size: 36px;
+  }
+}
+
+.trend-container_right {
+  display: flex;
+  flex-wrap: wrap;
+  width: 55%;
+}
+
+.blue-link {
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $blue-color;
 }

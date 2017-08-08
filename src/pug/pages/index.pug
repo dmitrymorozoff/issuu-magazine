@@ -1,0 +1,61 @@
+extends ../layout/base
+
+block title
+    | Issuu Magazine
+
+block content
+        nav.nav
+                .logo
+                ul.menu
+                    li.menu__item Explore
+                    li.menu__item Publisher plants
+                .search
+                    input.search__input(type='search', placeholder='Search your issue..')
+                .auth
+                    button.auth__btn.auth__btn_signign Sign in
+                    button.auth__btn.auth__btn_signup Sing up
+        header
+            .wrapper
+                .header
+                    .header-info
+                        h1.header-info__title Read about what you love.
+                        p.header-info__content More quality content about more interesting things.
+                        button.orange-btn Read now
+                    .slider
+                        .slider-item
+                            img.slider-item__img(src='img/book1.png', alt='the world of abstract art book')
+        nav
+            .wrapper
+                .secondary-nav
+                    ul.menu
+                        li.menu__item Trending
+                        li.menu__item Categories
+                        li.menu__item For publishers
+                    button.orange-btn.orange-btn_second Become a publisher
+        section.trend-section
+            .wrapper
+                .treinding
+                    .trend-container.trend-container_left
+                        h2.trend-container__title Trending
+                        a.blue-link(href='#') See all publications
+                        .book.book_one
+                            img.book__img(src='img/page1.png', alt='book1')
+                        .book-content.book-content_one
+                            .book-content__title Photographize Magazine
+                            .book-content__desc
+                                | In this issue: Andreas Franke, Amr Elshamy, Martin Stranka, James Popsys, Sebastian Łuczywo, Jarosław
+                                | Wasek, Carmine Chiriacò, Manuel Archain, Anil Saxena, Fabio Martinelli.
+                    .trend-container.trend-container_right
+                        .book-wrapper
+                            .book-content.book-content_two
+                                .book-content__title Nordic Design Collective 
+                                .book-content__desc A community and marketplace believing in passion, entrepreneurship and good design. 
+                            .book.book_two
+                                img.book__img(src='img/page2.jpg', alt='book2')
+                        .book-wrapper
+                            .book.book_three
+                                img.book__img(src='img/page3.jpg', alt='book3')
+                            .book-content.book-content_three
+                                .book-content__title Decorated youth
+                                .book-content__desc A music, cinema, photography, and creative elements magazine that focuses on quality over quantity.
+                        
